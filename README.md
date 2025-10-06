@@ -9,7 +9,6 @@ This project presents an interactive dashboard for analyzing crime trends in Sou
 ### Requirements
 
 - Python 3.x
-- Install dependencies via:
-
+- 
 here are the datasets links : for Dataset1 https://www.kaggle.com/datasets/harutyunagababyan/crime-stats-of-south-africa-2011-2023 by(Kaggle)
                             : for Dataset2 https://www.kaggle.com/datasets/viroshensewpaul/general-household-survey-data-from-2012-to-2022 by (Kaggle)
