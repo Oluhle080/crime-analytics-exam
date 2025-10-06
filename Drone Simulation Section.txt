@@ -1,0 +1,48 @@
+Drone Simulation Section
+In this section, we'll outline how to simulate a drone that visits identified crime hotspots using a grid-based approach and simple path planning algorithms.
+
+1. Creating a Grid (3D Frame)
+We divide the area into uniform grid cells, for example, 1 km x 1 km squares. Each cell represents a possible patrol region. Crime hotspots detected from the classification model are assigned as Points of Interest (POIs) within these grid cells.
+
+2. Assigning Hotspots as POIs
+Using the geographic coordinates of identified hotspots, map each hotspot to its corresponding grid cell. These POIs become waypoints the drone must visit.
+
+3. Generating Waypoints and Path Planning
+Lawnmower Pattern: The drone flies back and forth in a systematic pattern covering all grid cells containing hotspots. This ensures full coverage.
+
+Nearest Neighbor Traversal: Starting from a base location, the drone visits the closest remaining hotspot POI iteratively until all are covered, optimizing for minimal travel distance.
+
+4. Example Python Pseudocode for Waypoint Generation
+python
+# Define grid boundaries and cell size
+grid_size = 1  # km
+# Sample hotspot coordinates (latitude, longitude)
+hotspots = [(34.05, -118.25), (34.06, -118.24), (34.07, -118.26)]
+
+# Placeholder function to assign grid cells (simplified)
+def assign_grid_cell(lat, lon, grid_size):
+    # Convert lat/lon to grid cell indices
+    cell_x = int(lat / grid_size)
+    cell_y = int(lon / grid_size)
+    return (cell_x, cell_y)
+
+grid_cells = [assign_grid_cell(lat, lon, grid_size) for lat, lon in hotspots]
+
+# Generate a simple lawnmower path covering these cells
+path = []
+# Sort grid_cells by x, then y (basic lawnmower traversal)
+grid_cells_sorted = sorted(grid_cells, key=lambda x: (x[0], x[1]))
+for cell in grid_cells_sorted:
+    path.append(cell)
+
+print("Waypoints for drone to visit:", path)
+5. Flying and Controlling the Drone
+Controlling a real drone requires GPS waypoints and flight commands. Python libraries such as DroneKit or DJI SDK enable:
+
+Uploading waypoint missions
+
+Real-time monitoring
+
+Flight control commands (takeoff, hover, land)
+
+The drone’s autopilot receives GPS coordinates and follows the planned path with safety checks. Obstacle avoidance and flight adjustments depend on the drone hardware capabilities and sensors.
